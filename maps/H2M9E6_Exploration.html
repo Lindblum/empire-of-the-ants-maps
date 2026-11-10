@@ -21,6 +21,7 @@
  .pp h3{margin:0 0 2px;font-size:16px;display:flex;align-items:center;gap:8px} .pp h3 img{width:32px;height:32px;border-radius:50%;border:2px solid var(--c);background:#000}
  .pp .k{color:#9d927c;font-size:11px;text-transform:uppercase;letter-spacing:.05em}
  .pp .shot{width:100%;border-radius:6px;margin:8px 0}
+ .pp .go{display:block;margin:8px 0 2px;padding:6px 8px;border-radius:5px;background:#2c261d;border:1px solid var(--c);color:#e8e2d6;text-decoration:none;font-weight:bold;text-align:center} .pp .go:hover{background:#3a3226}
  .pp .txt{white-space:pre-line;font-style:italic;color:#d8cfbd}
  .pp table{width:100%;border-collapse:collapse;margin-top:8px;font-size:12px} .pp td{padding:2px 0;vertical-align:top} .pp td:first-child{color:#9d927c;width:42%}
  .pp .dlg{max-height:170px;overflow-y:auto;margin-top:8px;border-top:1px solid #3a3226;padding-top:6px}
@@ -28,7 +29,7 @@
  .leaflet-container a.leaflet-popup-close-button{color:#b9ad97}
  .note{font-size:11px;color:#7d735f;margin-top:14px;line-height:1.4}
 </style></head><body><div id="wrap">
-<div id="side"><a class="back" href="../index.html">&larr; All maps</a><h1>Fourth hunt</h1><div class="sub">Chapter 2 · Ta-yu-kan · Exploration · H2M9E6_Exploration</div><div class="desc"><b>Southwestern Chli-pou-kan</b><br>The termites must be pushed back from our territory<br><br>Objective: Catch the fireflies</div>
+<div id="side"><a class="back" href="../index.html">&larr; All maps</a><h1>Fourth hunt</h1><div class="sub">Chapter 4 · Chli-pou-kan · Exploration · H2M9E6_Exploration</div><div class="desc"><b>Southwestern Chli-pou-kan</b><br>The termites must be pushed back from our territory<br><br>Objective: Catch the fireflies</div>
 <div class="filters"><button id="all">Show all</button><button id="none">Hide all</button></div><div id="cats"></div>
 <div class="note">The game has no minimap image for this level, so markers are shown on a grid (1 square ≈ 6 m). Background: terrain relief from the placed ground meshes (cave floor; ceilings and surfaces &gt;3 m above the nearest marker left out) (light = high, dark = low, ≈73 m range); toggle it top right.<br>Icons, screenshots and text from the game files.</div></div><div id="map"></div></div>
 <script>
@@ -59,6 +60,7 @@ for (const m of DATA.markers) {
   const html = `<div class="pp" style="--c:${c.color}"><div class="k">${esc(c.label)}</div>
     <h3>${m.icon ? `<img src="${m.icon}">` : ''}${esc(m.title)}</h3>
     ${m.img ? `<img class="shot" src="${m.img}">` : ''}${m.text ? `<div class="txt">${esc(m.text)}</div>` : ''}
+    ${m.link ? `<a class="go" href="${m.link}">Open mission map &rarr;</a>` : ''}
     ${m.extra ? `<div class="dlg">${m.extra}</div>` : ''}<table>${rows}</table></div>`;
   L.marker([m.y, m.x], {icon, title: m.title, riseOnHover: true}).bindPopup(html, {maxWidth: 330}).bindTooltip(esc(m.title), {direction: 'top', offset: [0, -sz/2]}).addTo(layers[m.cat]);
 }

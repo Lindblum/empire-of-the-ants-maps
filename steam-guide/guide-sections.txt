@@ -73,6 +73,7 @@ Click a map name to open it.
 [*][url=https://lindblum.github.io/empire-of-the-ants-maps/maps/H2_ShaeChuKan.html]Ta-yu-kan[/url] - Chapter 2 hub
 [*][url=https://lindblum.github.io/empire-of-the-ants-maps/maps/H2M0E0_Traversal.html]The flood[/url] - Traversal
 [*][url=https://lindblum.github.io/empire-of-the-ants-maps/maps/H2M1E1_Exploration.html]Lost sisters[/url] - Exploration
+[*][url=https://lindblum.github.io/empire-of-the-ants-maps/maps/H4M1E1_Exploration.html]Second hunt[/url] - Exploration
 [*][url=https://lindblum.github.io/empire-of-the-ants-maps/maps/H2M2E2_TacticIntervention.html]Flanking[/url] - Tactic
 [*][url=https://lindblum.github.io/empire-of-the-ants-maps/maps/H2M3E4_Strategic.html]A way out[/url] - Strategic
 [*][url=https://lindblum.github.io/empire-of-the-ants-maps/maps/H2M4E1_Exploration_Night.html]Behind enemy lines[/url] - Exploration
@@ -80,7 +81,6 @@ Click a map name to open it.
 [*][url=https://lindblum.github.io/empire-of-the-ants-maps/maps/H2M6E3_Tactic.html]Snailing out of here[/url] - Tactic
 [*][url=https://lindblum.github.io/empire-of-the-ants-maps/maps/H2M7E3_Tactic.html]Holding the line[/url] - Tactic
 [*][url=https://lindblum.github.io/empire-of-the-ants-maps/maps/H2M8E5_Strategic.html]Buying time[/url] - Strategic
-[*][url=https://lindblum.github.io/empire-of-the-ants-maps/maps/H2M9E6_Exploration.html]Fourth hunt[/url] - Exploration
 [*][url=https://lindblum.github.io/empire-of-the-ants-maps/maps/H2M10E2_Strategic.html]Foothold[/url] - Strategic
 [/list]
 
@@ -106,12 +106,12 @@ Click a map name to open it.
 [list]
 [*][url=https://lindblum.github.io/empire-of-the-ants-maps/maps/H4_Chlipoukan.html]Chli-pou-kan[/url] - Chapter 4 hub
 [*][url=https://lindblum.github.io/empire-of-the-ants-maps/maps/H4M0E0_Traversal.html]End of the world[/url] - Traversal
-[*][url=https://lindblum.github.io/empire-of-the-ants-maps/maps/H4M1E1_Exploration.html]Second hunt[/url] - Exploration
 [*][url=https://lindblum.github.io/empire-of-the-ants-maps/maps/H4M3E2_Strategic.html]Battle of the pinecones[/url] - Strategic
 [*][url=https://lindblum.github.io/empire-of-the-ants-maps/maps/H4M4E2_TacticEcoRace.html]Spoils of war[/url] - Tactic
 [*][url=https://lindblum.github.io/empire-of-the-ants-maps/maps/H4M5E3_Strategic.html]Battle of the arch[/url] - Strategic
 [*][url=https://lindblum.github.io/empire-of-the-ants-maps/maps/H4M6_TacticDefense.html]A city under attack[/url] - Tactic
 [*][url=https://lindblum.github.io/empire-of-the-ants-maps/maps/H4M7E3_TacticEcoDef.html]Supply lines[/url] - Tactic
+[*][url=https://lindblum.github.io/empire-of-the-ants-maps/maps/H2M9E6_Exploration.html]Fourth hunt[/url] - Exploration
 [/list]
 
 ==================== SECTION: Chapter 5 ====================
