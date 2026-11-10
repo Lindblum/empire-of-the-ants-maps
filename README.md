@@ -24,14 +24,14 @@ overlay-blended onto the relief: map colours with terrain shading.
   each map's sidebar. `H1M3E3_TutorialStrategic` and `H1M4E3_TutorialCombat` are approximate.
 - **Territory regions only** (`HMM4_Strategic`, `HCoopM1`, `HCoopM2`, `HCoop_Horde2`): the game has no rendered
   minimap, so the region map is drawn translucent over the terrain relief.
-- **Terrain relief** (56 levels), drawn in the same frame as the minimap:
+- **Terrain relief** (all 60 levels), drawn in the same frame as the minimap:
   - Most come from the stitched Landscape heightmaps of the level's `*_Terrain` sublevel, including rotated and
     tilted landscapes. Overlapping landscapes are drawn largest first, and the backdrop is dimmed.
   - The 4 cave levels are rendered from the placed ground meshes. Only upward-facing surfaces up to 3 m above the
     nearest marker are kept, so cave roofs drop out.
-  - None for `H3M3E2`, `H3M4E2` (+ Challenge mode), where the markers stand on meshes ~30 m above the landscape,
-    or for `H5M7E7_Exploration`, which has no Landscape. On levels with a minimap, the relief is added only when the
-    markers sit on the landscape (median height offset under 12 m).
+  - `H3M3E2` and `H3M4E2` (+ Challenge mode) are built on meshes ~30 m above their landscape, so they are rendered
+    from the meshes too, with the landscape as a dimmed backdrop. (On minimap levels, meshes are used when the
+    median marker height is more than 12 m off the landscape.)
 
 ## How it's built
 The pipeline lives in the companion modding project `empire-of-the-ants-mod-spiders`, which is not published:
