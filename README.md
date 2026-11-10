@@ -17,16 +17,21 @@ from the game files. Open **`index.html`**, pick a map, and click a marker for i
 | `steam-guide/` | Steam guide text, images and `make_images.py` |
 
 ## Backgrounds
+Toggle the **Map**, **Relief** and **Grid** layers in the sidebar. With Map and Relief both on (the default), the map is
+overlay-blended onto the relief: map colours with terrain shading.
 - **In-game minimap** (35 levels), aligned via the minimap camera and ortho width, with an automatic
   rotation/scale/mirror fit where a level reuses or rotates another level's render. The fit and its score are shown in
   each map's sidebar. `H1M3E3_TutorialStrategic` and `H1M4E3_TutorialCombat` are approximate.
 - **Territory regions only** (`HMM4_Strategic`, `HCoopM1`, `HCoopM2`, `HCoop_Horde2`): the game has no rendered
-  minimap, so the region map is drawn translucent.
-- **Terrain relief + grid** (18 levels with no minimap, toggle top right):
-  - 14 come from the stitched Landscape heightmaps of the level's `*_Terrain` sublevel. Overlapping landscapes are
-    drawn largest first, and the backdrop is dimmed.
+  minimap, so the region map is drawn translucent over the terrain relief.
+- **Terrain relief** (56 levels), drawn in the same frame as the minimap:
+  - Most come from the stitched Landscape heightmaps of the level's `*_Terrain` sublevel, including rotated and
+    tilted landscapes. Overlapping landscapes are drawn largest first, and the backdrop is dimmed.
   - The 4 cave levels are rendered from the placed ground meshes. Only upward-facing surfaces up to 3 m above the
     nearest marker are kept, so cave roofs drop out.
+  - None for `H3M3E2`, `H3M4E2` (+ Challenge mode), where the markers stand on meshes ~30 m above the landscape,
+    or for `H5M7E7_Exploration`, which has no Landscape. On levels with a minimap, the relief is added only when the
+    markers sit on the landscape (median height offset under 12 m).
 
 ## How it's built
 The pipeline lives in the companion modding project `empire-of-the-ants-mod-spiders`, which is not published:

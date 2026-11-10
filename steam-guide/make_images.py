@@ -9,6 +9,7 @@ import json
 import os
 import re
 
+import numpy as np
 from PIL import Image, ImageDraw, ImageFont
 
 SITE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -65,6 +66,27 @@ def badge(icon, ring, d):
     return im
 
 
+def blend_layers(data, S):
+    """The page's default background: relief, with the minimap overlay-blended onto it (as the page's CSS
+    mix-blend-mode: overlay) or, for territory regions, drawn translucent over it."""
+    dark = (42, 36, 27, 255)
+    ld = lambda u: Image.open(os.path.join(MAPS, u)).convert('RGBA').resize((S, S), Image.LANCZOS)
+    base = Image.new('RGBA', (S, S), dark)
+    if data.get('terrain'):
+        base.alpha_composite(ld(data['terrain']))
+    if data.get('bg'):
+        if data.get('regions') or not data.get('terrain'):
+            base.alpha_composite(ld(data['bg']))
+        else:
+            top = Image.new('RGBA', (S, S), dark)
+            top.alpha_composite(ld(data['bg']))
+            b = np.asarray(base, float)[..., :3] / 255
+            a = np.asarray(top, float)[..., :3] / 255
+            ov = np.where(b < .5, 2 * a * b, 1 - 2 * (1 - a) * (1 - b))
+            base = Image.fromarray((ov * 255).round().astype(np.uint8), 'RGB').convert('RGBA')
+    return base
+
+
 def tile(level, size):
     """Map preview: background (minimap or terrain relief, else grid) and markers, framed like the page."""
     data, cats = page(level)
@@ -77,10 +99,7 @@ def tile(level, size):
         cx, cy = (min(xs) + max(xs)) / 2, (min(ys) + max(ys)) / 2
         half = max(max(xs) - min(xs), max(ys) - min(ys)) / 2 * 1.16 + 20
         x0, y0, x1, y1 = cx - half, cy - half, cx + half, cy + half
-    canvas = Image.new('RGBA', (S, S), (42, 36, 27, 255))
-    src = data.get('bg') or data.get('terrain')
-    if src:
-        canvas.alpha_composite(Image.open(os.path.join(MAPS, src)).convert('RGBA'))
+    canvas = blend_layers(data, S)
     if not data.get('bg'):
         g = ImageDraw.Draw(canvas)
         for i in range(0, S + 1, 64):
@@ -124,6 +143,8 @@ def gallery(rows, title, path, cols=4, size=290, gap=16):
         kind = kind.split(' (')[0]
         dr.text((x + 8, y + size + 28), kind, font=font(15), fill=SUB)
     im.save(path, optimize=True)
+    if os.path.getsize(path) > 1_000_000:  # keep each guide image under 1 MB: fall back to a 256-colour palette
+        im.quantize(256, method=Image.Quantize.FASTOCTREE).save(path, optimize=True)
     return im.size
 
 

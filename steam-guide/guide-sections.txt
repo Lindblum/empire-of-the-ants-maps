@@ -177,7 +177,7 @@ Click a map name to open it.
 
 [list]
 [*]Positions are where things are placed or spawned when the level starts. Scripted spawns and patrol routes are not shown.
-[*]Maps with an in-game minimap use it as the background. Levels without one (hubs, exploration, traversal and cave missions) show a terrain relief made from the level's own geometry (light = high, dark = low) with a grid; toggle them at the top right.
+[*]Toggle the map layers in the sidebar: the in-game map, a terrain relief made from the level's own geometry (light = high, dark = low), and a grid. With map and relief both on, they are blended. Levels without a minimap (hubs, exploration, traversal and cave missions) show the relief with the grid.
 [*]"Fortification" and "Intrusion" (Chapter 1 tutorials) have approximate marker positions.
 [*]Challenge-mode and skirmish maps share layouts with their campaign versions but are listed separately because their setups differ.
 [/list]
