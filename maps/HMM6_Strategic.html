@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Among the Roots – Empire of the Ants map</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<style>
+ html,body{margin:0;height:100%;background:#15130f;color:#e8e2d6;font-family:Arial,Helvetica,sans-serif}
+ #wrap{display:flex;height:100%}
+ #side{width:290px;overflow-y:auto;background:#1f1b15;border-right:1px solid #3a3226;padding:14px;box-sizing:border-box}
+ #side h1{font-size:19px;margin:6px 0 2px} .back{color:#7fd1ff;font-size:12px;text-decoration:none} #side .sub{color:#b9ad97;font-size:12px;margin-bottom:10px}
+ #side .desc{font-size:12px;color:#cfc6b4;line-height:1.4;margin:8px 0 12px}
+ .filters{display:flex;gap:6px;margin-bottom:8px} .filters button{flex:1;background:#2c261d;color:#e8e2d6;border:1px solid #4a4030;border-radius:4px;padding:4px;cursor:pointer;font-size:12px}
+ .cat{display:flex;align-items:center;gap:8px;padding:5px 6px;border-radius:6px;cursor:pointer;user-select:none;font-size:13px}
+ .cat:hover{background:#2c261d} .cat.off{opacity:.35}
+ .cat img{width:26px;height:26px;border-radius:50%;background:#000;border:2px solid var(--c);object-fit:cover}
+ .cat .n{margin-left:auto;color:#9d927c;font-size:12px}
+ #map{flex:1;background:#2a241b}
+ .gi{border-radius:50%;border:2px solid var(--c);background:#111 center/cover no-repeat;box-shadow:0 1px 4px rgba(0,0,0,.7)}
+ .leaflet-popup-content-wrapper{background:#1f1b15;color:#e8e2d6;border-radius:8px} .leaflet-popup-tip{background:#1f1b15}
+ .leaflet-popup-content{margin:12px 14px;width:300px!important;font-size:13px;line-height:1.4}
+ .pp h3{margin:0 0 2px;font-size:16px;display:flex;align-items:center;gap:8px} .pp h3 img{width:32px;height:32px;border-radius:50%;border:2px solid var(--c);background:#000}
+ .pp .k{color:#9d927c;font-size:11px;text-transform:uppercase;letter-spacing:.05em}
+ .pp .shot{width:100%;border-radius:6px;margin:8px 0}
+ .pp .txt{white-space:pre-line;font-style:italic;color:#d8cfbd}
+ .pp table{width:100%;border-collapse:collapse;margin-top:8px;font-size:12px} .pp td{padding:2px 0;vertical-align:top} .pp td:first-child{color:#9d927c;width:42%}
+ .pp .dlg{max-height:170px;overflow-y:auto;margin-top:8px;border-top:1px solid #3a3226;padding-top:6px}
+ .pp .dlg p{margin:3px 0} .pp .npc{color:#e8e2d6} .pp .ans{padding-left:10px;color:#cfc6b4} .pp .you{color:#7fd1ff}
+ .leaflet-container a.leaflet-popup-close-button{color:#b9ad97}
+ .note{font-size:11px;color:#7d735f;margin-top:14px;line-height:1.4}
+</style></head><body><div id="wrap">
+<div id="side"><a class="back" href="../index.html">&larr; All maps</a><h1>Among the Roots</h1><div class="sub">Skirmish / multiplayer (standard, fast and slow variants) · HMM6_Strategic</div><div class="desc">This border is a highly contested area. Find and destroy all enemy headquarters</div>
+<div class="filters"><button id="all">Show all</button><button id="none">Hide all</button></div><div id="cats"></div>
+<div class="note">Background: in-game minimap. Alignment: camera (100%).<br>Icons, screenshots and text from the game files.</div></div><div id="map"></div></div>
+<script>
+const DATA = {"bg": "assets/minimap_HMM6_Strategic.png", "terrain": null, "markers": [{"title": "Start position", "cat": "start", "icon": "assets/UI_minimap_Player.png", "img": null, "text": "", "details": [["World X / Y / Z", "32469 / 71472 / 962"]], "extra": "", "x": 248.2, "y": -317.5}, {"title": "Start position", "cat": "start", "icon": "assets/UI_minimap_Player.png", "img": null, "text": "", "details": [["World X / Y / Z", "42719 / 88844 / 1900"]], "extra": "", "x": 531.9, "y": -798.3}, {"title": "Start position", "cat": "start", "icon": "assets/UI_minimap_Player.png", "img": null, "text": "", "details": [["World X / Y / Z", "52967 / 71913 / 1156"]], "extra": "", "x": 815.5, "y": -329.7}, {"title": "Woody path nest", "cat": "nest", "icon": "assets/UI_minimap_FactionNeutral.png", "img": null, "text": "", "details": [["Owner clan", "Neutral"], ["Upgrade slots", 7], ["World X / Y / Z", "47014 / 86333 / 1160"]], "extra": "", "ring": "#9a9a9a", "x": 650.8, "y": -728.8}, {"title": "Leafless nest", "cat": "nest", "icon": "assets/UI_minimap_FactionNeutral.png", "img": null, "text": "", "details": [["Owner clan", "Neutral"], ["Upgrade slots", 7], ["World X / Y / Z", "49802 / 77099 / 1054"]], "extra": "", "ring": "#9a9a9a", "x": 727.9, "y": -473.2}, {"title": "Eastern frontier", "cat": "nest", "icon": "assets/UI_minimap_FactionNeutral.png", "img": null, "text": "", "details": [["Owner clan", "Neutral"], ["Upgrade slots", 9], ["World X / Y / Z", "50112 / 82237 / 771"]], "extra": "", "ring": "#9a9a9a", "x": 736.5, "y": -615.4}, {"title": "Western frontier", "cat": "nest", "icon": "assets/UI_minimap_FactionNeutral.png", "img": null, "text": "", "details": [["Owner clan", "Neutral"], ["Upgrade slots", 9], ["World X / Y / Z", "34381 / 82292 / 838"]], "extra": "", "ring": "#9a9a9a", "x": 301.1, "y": -616.9}, {"title": "Dead tree headquarters", "cat": "nest", "icon": "assets/UI_minimap_FactionAlpha.png", "img": null, "text": "", "details": [["Owner clan", "Alpha"], ["Upgrade slots", 9], ["World X / Y / Z", "42462 / 88225 / 1239"]], "extra": "", "ring": "#2f7de1", "x": 524.8, "y": -781.1}, {"title": "Watchtower nest", "cat": "nest", "icon": "assets/UI_minimap_FactionNeutral.png", "img": null, "text": "", "details": [["Owner clan", "Neutral"], ["Upgrade slots", 7], ["World X / Y / Z", "38235 / 85853 / 1181"]], "extra": "", "ring": "#9a9a9a", "x": 407.8, "y": -715.5}, {"title": "Rocky nest", "cat": "nest", "icon": "assets/UI_minimap_FactionNeutral.png", "img": null, "text": "", "details": [["Owner clan", "Neutral"], ["Upgrade slots", 7], ["World X / Y / Z", "34183 / 77122 / 926"]], "extra": "", "ring": "#9a9a9a", "x": 295.7, "y": -473.9}, {"title": "Northern frontier", "cat": "nest", "icon": "assets/UI_minimap_FactionNeutral.png", "img": null, "text": "", "details": [["Owner clan", "Neutral"], ["Upgrade slots", 9], ["World X / Y / Z", "42447 / 69046 / 782"]], "extra": "", "ring": "#9a9a9a", "x": 524.4, "y": -250.4}, {"title": "Wet sand nest", "cat": "nest", "icon": "assets/UI_minimap_FactionNeutral.png", "img": null, "text": "", "details": [["Owner clan", "Neutral"], ["Upgrade slots", 7], ["World X / Y / Z", "37758 / 70960 / 851"]], "extra": "", "ring": "#9a9a9a", "x": 394.6, "y": -303.3}, {"title": "Shadow nest", "cat": "nest", "icon": "assets/UI_minimap_FactionNeutral.png", "img": null, "text": "", "details": [["Owner clan", "Neutral"], ["Upgrade slots", 7], ["World X / Y / Z", "47381 / 70699 / 920"]], "extra": "", "ring": "#9a9a9a", "x": 660.9, "y": -296.1}, {"title": "Mushroom headquarters", "cat": "nest", "icon": "assets/UI_minimap_FactionBeta.png", "img": null, "text": "", "details": [["Owner clan", "Beta"], ["Upgrade slots", 9], ["World X / Y / Z", "51934 / 72589 / 866"]], "extra": "", "ring": "#d93a32", "x": 786.9, "y": -348.4}, {"title": "Sea headquarters", "cat": "nest", "icon": "assets/UI_minimap_FactionGamma.png", "img": null, "text": "", "details": [["Owner clan", "Gamma"], ["Upgrade slots", 9], ["World X / Y / Z", "32907 / 72191 / 813"]], "extra": "", "ring": "#e07b1a", "x": 260.4, "y": -337.4}, {"title": "Wood foraging spot", "cat": "forage", "icon": "assets/UI_Minimap_wood.png", "img": null, "text": "", "details": [["Tier", "T1"], ["Amount", "?"], ["Gatherers", 100], ["Guarded by", "Firebug"], ["World X / Y / Z", "52255 / 79633 / 1022"]], "extra": "", "x": 795.8, "y": -543.4}, {"title": "Food foraging spot", "cat": "forage", "icon": "assets/UI_Minimap_food.png", "img": null, "text": "", "details": [["Tier", "T1"], ["Amount", "?"], ["Gatherers", 100], ["Guarded by", "Firebug"], ["World X / Y / Z", "50466 / 85542 / 1212"]], "extra": "", "x": 746.3, "y": -706.9}, {"title": "Wood foraging spot", "cat": "forage", "icon": "assets/UI_Minimap_wood.png", "img": null, "text": "", "details": [["Tier", "T1"], ["Amount", "?"], ["Gatherers", 100], ["Guarded by", "Firebug"], ["World X / Y / Z", "34719 / 85589 / 1199"]], "extra": "", "x": 310.5, "y": -708.2}, {"title": "Food foraging spot", "cat": "forage", "icon": "assets/UI_Minimap_food.png", "img": null, "text": "", "details": [["Tier", "T1"], ["Amount", "?"], ["Gatherers", 100], ["Guarded by", "Firebug"], ["World X / Y / Z", "32129 / 80007 / 835"]], "extra": "", "x": 238.8, "y": -553.7}, {"title": "Wood foraging spot", "cat": "forage", "icon": "assets/UI_Minimap_wood.png", "img": null, "text": "", "details": [["Tier", "T1"], ["Amount", "?"], ["Gatherers", 100], ["Guarded by", "Firebug"], ["World X / Y / Z", "39393 / 67839 / 898"]], "extra": "", "x": 439.8, "y": -217.0}, {"title": "Food foraging spot", "cat": "forage", "icon": "assets/UI_Minimap_food.png", "img": null, "text": "", "details": [["Tier", "T1"], ["Amount", "?"], ["Gatherers", 100], ["Guarded by", "Firebug"], ["World X / Y / Z", "45545 / 67671 / 864"]], "extra": "", "x": 610.1, "y": -212.3}, {"title": "Dragonfly", "cat": "wildlife", "icon": "assets/UI_Bestiary_Dragonfly.png", "img": "assets/UI_Screen_Dragonfly.jpg", "text": "Silent predator.\nHunts small creatures, faster than any other predator around.\nSeems uninterested by our kind.", "details": [["Sublevel", "HMM6_BreathingWorld"], ["World X / Y / Z", "34265 / 95005 / 5434"]], "extra": "", "x": 297.9, "y": -968.8}, {"title": "Dragonfly", "cat": "wildlife", "icon": "assets/UI_Bestiary_Dragonfly.png", "img": "assets/UI_Screen_Dragonfly.jpg", "text": "Silent predator.\nHunts small creatures, faster than any other predator around.\nSeems uninterested by our kind.", "details": [["Sublevel", "HMM6_BreathingWorld"], ["World X / Y / Z", "65774 / 78477 / 2217"]], "extra": "", "x": 1170.0, "y": -511.4}, {"title": "Slug (spawner)", "cat": "wildlife", "icon": "assets/UI_Bestiary_Slug.png", "img": "assets/UI_Screen_Slug.jpg", "text": "Lesser creature, lesser snail.\nSlimy, slow, idiotic.\nEasy prey.", "details": [["Sublevel", "HMM6_BreathingWorld"], ["World X / Y / Z", "42450 / 75548 / 2830"]], "extra": "", "x": 524.4, "y": -430.3}, {"title": "Bumblebee (swarm)", "cat": "wildlife", "icon": "assets/UI_Bestiary_Bumblebee.png", "img": "assets/UI_Screen_Bumblebee.jpg", "text": "Lesser fluffy creature.\nFlies from flower to flower to collect nectar and feed its colony.\nGentle and noisy animals, not to be disturbed.", "details": [["Sublevel", "HMM6_BreathingWorld"], ["World X / Y / Z", "34440 / 98588 / 26956"]], "extra": "", "x": 302.8, "y": -1067.9}, {"title": "Jumping Spider", "cat": "wildlife", "icon": "assets/UI_Bestiary_JumpingSpider.png", "img": "assets/UI_Screen_Spider_Jumping.jpg", "text": "Surprising predator.\nUsing its legs to jump and hop, it hunts quickly.\nBe on your guard at all times.", "details": [["Sublevel", "HMM6_BreathingWorld"], ["World X / Y / Z", "46214 / 82897 / 2954"]], "extra": "", "x": 628.6, "y": -633.7}, {"title": "Jumping Spider", "cat": "wildlife", "icon": "assets/UI_Bestiary_JumpingSpider.png", "img": "assets/UI_Screen_Spider_Jumping.jpg", "text": "Surprising predator.\nUsing its legs to jump and hop, it hunts quickly.\nBe on your guard at all times.", "details": [["Sublevel", "HMM6_BreathingWorld"], ["World X / Y / Z", "38431 / 75691 / 778"]], "extra": "", "x": 413.2, "y": -434.3}, {"title": "Wasp (flight lane)", "cat": "wildlife", "icon": "assets/UI_Bestiary_Wasp.png", "img": "assets/UI_Screen_Wasp.jpg", "text": "Flying predator.\nA powerful and aggressive creature. Always very busy.\nSocial creature that shares many physical traits with ants.", "details": [["Sublevel", "HMM6_BreathingWorld"], ["World X / Y / Z", "35530 / 82389 / 11490"]], "extra": "", "x": 332.9, "y": -619.6}]};
+const CATS = [{"id": "start", "label": "Start position", "color": "#4aa3ff"}, {"id": "checkpoint", "label": "Checkpoints", "color": "#7fd1ff"}, {"id": "quest", "label": "Quest givers", "color": "#2ecc71"}, {"id": "golden", "label": "Golden beetles", "color": "#ffd700"}, {"id": "butterfly", "label": "Collectible butterflies", "color": "#ff8fd1"}, {"id": "collect", "label": "Lost sisters / aphids", "color": "#ff6fb5"}, {"id": "poi", "label": "Points of interest (scans)", "color": "#b07cff"}, {"id": "nest", "label": "Nests", "color": "#9a9a9a"}, {"id": "forage", "label": "Foraging spots", "color": "#3aa655"}, {"id": "resource", "label": "Large resources", "color": "#f2c230"}, {"id": "predator", "label": "Predators & beasts", "color": "#e74c3c"}, {"id": "wildlife", "label": "Wildlife", "color": "#e67e22"}];
+const map = L.map('map', {crs: L.CRS.Simple, minZoom: -2, maxZoom: 4, zoomSnap: 0.25, attributionControl: false});
+const B = [[-1024, 0], [0, 1024]];
+if (DATA.bg) L.imageOverlay(DATA.bg, B).addTo(map);
+else {
+  const overlays = {};
+  if (DATA.terrain) overlays['Terrain relief'] = L.imageOverlay(DATA.terrain, B).addTo(map);
+  const g = overlays['Grid'] = L.layerGroup().addTo(map);
+  L.control.layers(null, overlays, {collapsed: false}).addTo(map);
+  for (let i = 0; i <= 1024; i += 64) {
+    L.polyline([[-i, 0], [-i, 1024]], {color: '#3a3226', weight: 1, interactive: false}).addTo(g);
+    L.polyline([[0, i], [-1024, i]], {color: '#3a3226', weight: 1, interactive: false}).addTo(g);
+  }
+}
+const layers = {};
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+for (const c of CATS) layers[c.id] = L.layerGroup().addTo(map);
+for (const m of DATA.markers) {
+  const c = CATS.find(x => x.id === m.cat);
+  const sz = m.cat === 'wildlife' ? 26 : 34;
+  const icon = L.divIcon({className: '', iconSize: [sz, sz], iconAnchor: [sz/2, sz/2], popupAnchor: [0, -sz/2],
+    html: `<div class="gi" style="--c:${m.ring || c.color};width:${sz-4}px;height:${sz-4}px;background-image:url('${m.icon || ''}')"></div>`});
+  const rows = m.details.map(([k, v]) => `<tr><td>${esc(k)}</td><td>${esc(v)}</td></tr>`).join('');
+  const html = `<div class="pp" style="--c:${c.color}"><div class="k">${esc(c.label)}</div>
+    <h3>${m.icon ? `<img src="${m.icon}">` : ''}${esc(m.title)}</h3>
+    ${m.img ? `<img class="shot" src="${m.img}">` : ''}${m.text ? `<div class="txt">${esc(m.text)}</div>` : ''}
+    ${m.extra ? `<div class="dlg">${m.extra}</div>` : ''}<table>${rows}</table></div>`;
+  L.marker([m.y, m.x], {icon, title: m.title, riseOnHover: true}).bindPopup(html, {maxWidth: 330}).bindTooltip(esc(m.title), {direction: 'top', offset: [0, -sz/2]}).addTo(layers[m.cat]);
+}
+const box = document.getElementById('cats');
+for (const c of CATS) {
+  const n = DATA.markers.filter(m => m.cat === c.id).length;
+  if (!n) continue;
+  const ic = (DATA.markers.find(m => m.cat === c.id && m.icon) || {}).icon || '';
+  const el = document.createElement('div');
+  el.className = 'cat'; el.style.setProperty('--c', c.color);
+  el.innerHTML = `<img src="${ic}"><span>${esc(c.label)}</span><span class="n">${n}</span>`;
+  el.onclick = () => { const on = map.hasLayer(layers[c.id]); on ? map.removeLayer(layers[c.id]) : map.addLayer(layers[c.id]); el.classList.toggle('off', on); };
+  box.appendChild(el);
+}
+document.getElementById('all').onclick = () => { for (const c of CATS) map.addLayer(layers[c.id]); document.querySelectorAll('.cat').forEach(e => e.classList.remove('off')); };
+document.getElementById('none').onclick = () => { for (const c of CATS) map.removeLayer(layers[c.id]); document.querySelectorAll('.cat').forEach(e => e.classList.add('off')); };
+const pts = DATA.markers.map(m => [m.y, m.x]);
+map.fitBounds(DATA.bg ? B : L.latLngBounds(pts).pad(0.08));
+</script></body></html>

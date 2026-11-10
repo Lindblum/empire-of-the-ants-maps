@@ -1,0 +1,188 @@
+==================== SECTION: Overview ====================
+[h1]Interactive maps for every mission[/h1]
+Every campaign mission, hub, challenge, skirmish and co-op map, with everything that is placed on it when the level starts: nests, foraging spots, resources, golden beetles, butterflies, lost sisters, quest givers, scans, checkpoints and creatures.
+
+[b][url=https://lindblum.github.io/empire-of-the-ants-maps/]>> Open the maps <<[/url][/b]
+
+[i](IMAGE: index.png)[/i]
+
+[h2]Contents[/h2]
+[olist]
+[*]What's on the maps
+[*]Chapter 1
+[*]Chapter 2
+[*]Chapter 3
+[*]Chapter 4
+[*]Chapter 5
+[*]Challenge mode
+[*]Skirmish & multiplayer
+[*]Co-op & horde
+[*]Notes
+[*]Credits
+[/olist]
+The Guide Index on the right side of this page jumps to each section.
+
+[h2]How to use[/h2]
+[list]
+[*]Pick a map from the index (or from the lists in this guide).
+[*]Click a marker for its in-game icon, screenshot, bestiary or collection text, quest dialogue and details (nest owner, food or wood, tier, guardian).
+[*]Use the categories on the left to show or hide markers ("Hide all", then switch on only what you are hunting for).
+[*]Scroll to zoom, drag to pan. Works in any browser, including the Steam overlay browser (Shift+Tab).
+[/list]
+
+[spoiler]The maps show every collectible's position, so treat them as spoilers if you want to find things yourself.[/spoiler]
+
+==================== SECTION: What's on the maps ====================
+[i](IMAGE: legend.png)[/i]
+
+[i](IMAGE: H2M3E4_Strategic.png)[/i]
+
+[table]
+[tr][th]Category[/th][th]What it shows[/th][/tr]
+[tr][td]Start position[/td][td]Where your colony (and other clans) start[/td][/tr]
+[tr][td]Checkpoints[/td][td]Exploration and traversal checkpoints[/td][/tr]
+[tr][td]Quest givers[/td][td]NPCs with side quests, with their dialogue[/td][/tr]
+[tr][td]Golden beetles[/td][td]Collectible golden tortoise beetles[/td][/tr]
+[tr][td]Collectible butterflies[/td][td]Collectible monarch butterflies[/td][/tr]
+[tr][td]Lost sisters / aphids[/td][td]Ants and aphids to rescue or recover[/td][/tr]
+[tr][td]Points of interest[/td][td]Scannable objects, with their collection text[/td][/tr]
+[tr][td]Nests[/td][td]Every nest; ring colour = owner clan[/td][/tr]
+[tr][td]Foraging spots[/td][td]Food or wood, tier, amount and guardian creature[/td][/tr]
+[tr][td]Large resources[/td][td]Large resource objects (click one for its type)[/td][/tr]
+[tr][td]Predators & beasts[/td][td]Dangerous creatures placed in the level[/td][/tr]
+[tr][td]Wildlife[/td][td]Ambient creatures (shown at their spawn points)[/td][/tr]
+[/table]
+
+==================== SECTION: Chapter 1 ====================
+[h1]Chapter 1[/h1]
+[i](IMAGE: gallery_chapter-1.png)[/i]
+Click a map name to open it.
+[list]
+[*][url=https://lindblum.github.io/empire-of-the-ants-maps/maps/H1_BelOKan.html]Bel-o-kan[/url] - Chapter 1 hub
+[*][url=https://lindblum.github.io/empire-of-the-ants-maps/maps/H1M1E1_TutorialExploration.html]First hunt[/url] - Exploration
+[*][url=https://lindblum.github.io/empire-of-the-ants-maps/maps/H1M2E2_TutorialTactic.html]Restoring the first outpost[/url] - Tactic
+[*][url=https://lindblum.github.io/empire-of-the-ants-maps/maps/H1M3E3_TutorialStrategic.html]Fortification[/url] - Strategic
+[*][url=https://lindblum.github.io/empire-of-the-ants-maps/maps/H1M4E3_TutorialCombat.html]Intrusion[/url] - Combat
+[/list]
+
+==================== SECTION: Chapter 2 ====================
+[h1]Chapter 2[/h1]
+[i](IMAGE: gallery_chapter-2.png)[/i]
+Click a map name to open it.
+[list]
+[*][url=https://lindblum.github.io/empire-of-the-ants-maps/maps/H2_ShaeChuKan.html]Ta-yu-kan[/url] - Chapter 2 hub
+[*][url=https://lindblum.github.io/empire-of-the-ants-maps/maps/H2M0E0_Traversal.html]The flood[/url] - Traversal
+[*][url=https://lindblum.github.io/empire-of-the-ants-maps/maps/H2M1E1_Exploration.html]Lost sisters[/url] - Exploration
+[*][url=https://lindblum.github.io/empire-of-the-ants-maps/maps/H2M2E2_TacticIntervention.html]Flanking[/url] - Tactic
+[*][url=https://lindblum.github.io/empire-of-the-ants-maps/maps/H2M3E4_Strategic.html]A way out[/url] - Strategic
+[*][url=https://lindblum.github.io/empire-of-the-ants-maps/maps/H2M4E1_Exploration_Night.html]Behind enemy lines[/url] - Exploration
+[*][url=https://lindblum.github.io/empire-of-the-ants-maps/maps/H2M5E2_TacticEconomyRace.html]Stockpiling[/url] - Tactic
+[*][url=https://lindblum.github.io/empire-of-the-ants-maps/maps/H2M6E3_Tactic.html]Snailing out of here[/url] - Tactic
+[*][url=https://lindblum.github.io/empire-of-the-ants-maps/maps/H2M7E3_Tactic.html]Holding the line[/url] - Tactic
+[*][url=https://lindblum.github.io/empire-of-the-ants-maps/maps/H2M8E5_Strategic.html]Buying time[/url] - Strategic
+[*][url=https://lindblum.github.io/empire-of-the-ants-maps/maps/H2M9E6_Exploration.html]Fourth hunt[/url] - Exploration
+[*][url=https://lindblum.github.io/empire-of-the-ants-maps/maps/H2M10E2_Strategic.html]Foothold[/url] - Strategic
+[/list]
+
+==================== SECTION: Chapter 3 ====================
+[h1]Chapter 3[/h1]
+[i](IMAGE: gallery_chapter-3.png)[/i]
+Click a map name to open it.
+[list]
+[*][url=https://lindblum.github.io/empire-of-the-ants-maps/maps/H3_Niziunikan.html]Niziu-ni-kan[/url] - Chapter 3 hub
+[*][url=https://lindblum.github.io/empire-of-the-ants-maps/maps/H3M1E1_Exploration.html]Third hunt[/url] - Exploration
+[*][url=https://lindblum.github.io/empire-of-the-ants-maps/maps/H3M2E1_Exploration.html]Stealing[/url] - Exploration
+[*][url=https://lindblum.github.io/empire-of-the-ants-maps/maps/H3M3E2.html]Steadfast[/url] - Tactic
+[*][url=https://lindblum.github.io/empire-of-the-ants-maps/maps/H3M4E2.html]Cut the head[/url] - Strategic
+[*][url=https://lindblum.github.io/empire-of-the-ants-maps/maps/H3M5E3.html]Rich food[/url] - Strategic
+[*][url=https://lindblum.github.io/empire-of-the-ants-maps/maps/H3M6E4_TacticCave.html]Nowhere to run[/url] - Tactic
+[*][url=https://lindblum.github.io/empire-of-the-ants-maps/maps/H3M7E3.html]Before the storm[/url] - Strategic
+[/list]
+
+==================== SECTION: Chapter 4 ====================
+[h1]Chapter 4[/h1]
+[i](IMAGE: gallery_chapter-4.png)[/i]
+Click a map name to open it.
+[list]
+[*][url=https://lindblum.github.io/empire-of-the-ants-maps/maps/H4_Chlipoukan.html]Chli-pou-kan[/url] - Chapter 4 hub
+[*][url=https://lindblum.github.io/empire-of-the-ants-maps/maps/H4M0E0_Traversal.html]End of the world[/url] - Traversal
+[*][url=https://lindblum.github.io/empire-of-the-ants-maps/maps/H4M1E1_Exploration.html]Second hunt[/url] - Exploration
+[*][url=https://lindblum.github.io/empire-of-the-ants-maps/maps/H4M3E2_Strategic.html]Battle of the pinecones[/url] - Strategic
+[*][url=https://lindblum.github.io/empire-of-the-ants-maps/maps/H4M4E2_TacticEcoRace.html]Spoils of war[/url] - Tactic
+[*][url=https://lindblum.github.io/empire-of-the-ants-maps/maps/H4M5E3_Strategic.html]Battle of the arch[/url] - Strategic
+[*][url=https://lindblum.github.io/empire-of-the-ants-maps/maps/H4M6_TacticDefense.html]A city under attack[/url] - Tactic
+[*][url=https://lindblum.github.io/empire-of-the-ants-maps/maps/H4M7E3_TacticEcoDef.html]Supply lines[/url] - Tactic
+[/list]
+
+==================== SECTION: Chapter 5 ====================
+[h1]Chapter 5[/h1]
+[i](IMAGE: gallery_chapter-5.png)[/i]
+Click a map name to open it.
+[list]
+[*][url=https://lindblum.github.io/empire-of-the-ants-maps/maps/H5_Belokan.html]Bel-o-kan[/url] - Chapter 5 hub
+[*][url=https://lindblum.github.io/empire-of-the-ants-maps/maps/H5M1E1_Exploration.html]Bel-o-kan's catacombs[/url] - Exploration
+[*][url=https://lindblum.github.io/empire-of-the-ants-maps/maps/H5M2E2_Tactic.html]A frightening ally[/url] - Tactic
+[*][url=https://lindblum.github.io/empire-of-the-ants-maps/maps/H5M3E3_Strategic.html]Close quarters[/url] - Strategic
+[*][url=https://lindblum.github.io/empire-of-the-ants-maps/maps/H5M4E4_Strategic.html]All along the cypress roots[/url] - Strategic
+[*][url=https://lindblum.github.io/empire-of-the-ants-maps/maps/H5M5E5_Strategic.html]Killing to unite[/url] - Strategic
+[*][url=https://lindblum.github.io/empire-of-the-ants-maps/maps/H5M5E5_Strategic_Hard.html]Killing to unite (Hard)[/url] - Strategic
+[*][url=https://lindblum.github.io/empire-of-the-ants-maps/maps/H5M6_Strategic.html]Too close![/url] - Strategic
+[*][url=https://lindblum.github.io/empire-of-the-ants-maps/maps/H5M7E7_Exploration.html]Isolation[/url] - Exploration
+[/list]
+
+==================== SECTION: Challenge mode ====================
+[h1]Challenge mode[/h1]
+[i](IMAGE: gallery_challenge-mode.png)[/i]
+Click a map name to open it.
+[list]
+[*][url=https://lindblum.github.io/empire-of-the-ants-maps/maps/H3M4E2_ChallengeMode.html]Cut the head (Challenge mode)[/url] - Strategic
+[*][url=https://lindblum.github.io/empire-of-the-ants-maps/maps/H3M7E3_ChallengeMode.html]Before the storm (Challenge mode)[/url] - Strategic
+[*][url=https://lindblum.github.io/empire-of-the-ants-maps/maps/H4M3E2_ChallengeMode.html]Battle of the pinecones (Challenge mode)[/url] - Strategic
+[*][url=https://lindblum.github.io/empire-of-the-ants-maps/maps/H4M5E3_ChallengeMode.html]Battle of the arch (Challenge mode)[/url] - Strategic
+[*][url=https://lindblum.github.io/empire-of-the-ants-maps/maps/H5M3E3_ChallengeMode.html]Close quarters (Challenge mode)[/url] - Strategic
+[*][url=https://lindblum.github.io/empire-of-the-ants-maps/maps/H5M5E5_ChallengeMode.html]Killing to unite (Challenge mode)[/url] - Strategic
+[/list]
+
+==================== SECTION: Skirmish & multiplayer ====================
+[h1]Skirmish & multiplayer[/h1]
+Each map has standard, fast and slow variants with the same layout.
+[i](IMAGE: gallery_skirmish-multiplayer.png)[/i]
+Click a map name to open it.
+[list]
+[*][url=https://lindblum.github.io/empire-of-the-ants-maps/maps/HMP_Belokan.html]Bel-o-kan[/url] - Multiplayer hub
+[*][url=https://lindblum.github.io/empire-of-the-ants-maps/maps/HMM1_MultiplayerTest2.html]Deadly sands[/url]
+[*][url=https://lindblum.github.io/empire-of-the-ants-maps/maps/HMM2_Strategic_2_Lanes.html]Forest of Ta-yu-kan[/url]
+[*][url=https://lindblum.github.io/empire-of-the-ants-maps/maps/HMM3_Strategic.html]Art in the land[/url]
+[*][url=https://lindblum.github.io/empire-of-the-ants-maps/maps/HMM4_Strategic.html]Up the Hill[/url]
+[*][url=https://lindblum.github.io/empire-of-the-ants-maps/maps/HMM5_Strategic.html]The Arch[/url]
+[*][url=https://lindblum.github.io/empire-of-the-ants-maps/maps/HMM6_Strategic.html]Among the Roots[/url]
+[*][url=https://lindblum.github.io/empire-of-the-ants-maps/maps/HMM7_Strategic.html]The Giant Boulders[/url]
+[/list]
+
+==================== SECTION: Co-op & horde ====================
+[h1]Co-op & horde[/h1]
+[i](IMAGE: gallery_co-op-horde.png)[/i]
+Click a map name to open it.
+[list]
+[*][url=https://lindblum.github.io/empire-of-the-ants-maps/maps/HCoopM1.html]Pinecone wrestling[/url] - Co-op battle
+[*][url=https://lindblum.github.io/empire-of-the-ants-maps/maps/HCoopM2.html]Riverside conquest[/url] - Co-op battle
+[*][url=https://lindblum.github.io/empire-of-the-ants-maps/maps/HCoop_Horde1.html]The doomed city[/url] - Horde (co-op / solo)
+[*][url=https://lindblum.github.io/empire-of-the-ants-maps/maps/HCoop_Horde2.html]Waterside invasion[/url] - Horde (co-op / solo)
+[/list]
+
+==================== SECTION: Notes ====================
+[i](IMAGE: H2M0E0_Traversal.png)[/i]
+
+[i](IMAGE: H5M1E1_Exploration.png)[/i]
+
+[list]
+[*]Positions are where things are placed or spawned when the level starts. Scripted spawns and patrol routes are not shown.
+[*]Maps with an in-game minimap use it as the background. Levels without one (hubs, exploration, traversal and cave missions) show a terrain relief made from the level's own geometry (light = high, dark = low) with a grid; toggle them at the top right.
+[*]"Fortification" and "Intrusion" (Chapter 1 tutorials) have approximate marker positions.
+[*]Challenge-mode and skirmish maps share layouts with their campaign versions but are listed separately because their setups differ.
+[/list]
+
+Found something wrong or missing? Leave a comment with the map name and what you saw.
+
+==================== SECTION: Credits ====================
+Fan-made and unofficial. All data, icons, screenshots and text are extracted from the game files and belong to Microids and Tower Five.

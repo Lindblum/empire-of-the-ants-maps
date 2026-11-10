@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stealing – Empire of the Ants map</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<style>
+ html,body{margin:0;height:100%;background:#15130f;color:#e8e2d6;font-family:Arial,Helvetica,sans-serif}
+ #wrap{display:flex;height:100%}
+ #side{width:290px;overflow-y:auto;background:#1f1b15;border-right:1px solid #3a3226;padding:14px;box-sizing:border-box}
+ #side h1{font-size:19px;margin:6px 0 2px} .back{color:#7fd1ff;font-size:12px;text-decoration:none} #side .sub{color:#b9ad97;font-size:12px;margin-bottom:10px}
+ #side .desc{font-size:12px;color:#cfc6b4;line-height:1.4;margin:8px 0 12px}
+ .filters{display:flex;gap:6px;margin-bottom:8px} .filters button{flex:1;background:#2c261d;color:#e8e2d6;border:1px solid #4a4030;border-radius:4px;padding:4px;cursor:pointer;font-size:12px}
+ .cat{display:flex;align-items:center;gap:8px;padding:5px 6px;border-radius:6px;cursor:pointer;user-select:none;font-size:13px}
+ .cat:hover{background:#2c261d} .cat.off{opacity:.35}
+ .cat img{width:26px;height:26px;border-radius:50%;background:#000;border:2px solid var(--c);object-fit:cover}
+ .cat .n{margin-left:auto;color:#9d927c;font-size:12px}
+ #map{flex:1;background:#2a241b}
+ .gi{border-radius:50%;border:2px solid var(--c);background:#111 center/cover no-repeat;box-shadow:0 1px 4px rgba(0,0,0,.7)}
+ .leaflet-popup-content-wrapper{background:#1f1b15;color:#e8e2d6;border-radius:8px} .leaflet-popup-tip{background:#1f1b15}
+ .leaflet-popup-content{margin:12px 14px;width:300px!important;font-size:13px;line-height:1.4}
+ .pp h3{margin:0 0 2px;font-size:16px;display:flex;align-items:center;gap:8px} .pp h3 img{width:32px;height:32px;border-radius:50%;border:2px solid var(--c);background:#000}
+ .pp .k{color:#9d927c;font-size:11px;text-transform:uppercase;letter-spacing:.05em}
+ .pp .shot{width:100%;border-radius:6px;margin:8px 0}
+ .pp .txt{white-space:pre-line;font-style:italic;color:#d8cfbd}
+ .pp table{width:100%;border-collapse:collapse;margin-top:8px;font-size:12px} .pp td{padding:2px 0;vertical-align:top} .pp td:first-child{color:#9d927c;width:42%}
+ .pp .dlg{max-height:170px;overflow-y:auto;margin-top:8px;border-top:1px solid #3a3226;padding-top:6px}
+ .pp .dlg p{margin:3px 0} .pp .npc{color:#e8e2d6} .pp .ans{padding-left:10px;color:#cfc6b4} .pp .you{color:#7fd1ff}
+ .leaflet-container a.leaflet-popup-close-button{color:#b9ad97}
+ .note{font-size:11px;color:#7d735f;margin-top:14px;line-height:1.4}
+</style></head><body><div id="wrap">
+<div id="side"><a class="back" href="../index.html">&larr; All maps</a><h1>Stealing</h1><div class="sub">Chapter 3 · Niziu-ni-kan · Exploration · H3M2E1_Exploration</div><div class="desc"><b>Southern Niziu-ni-kan</b><br>We lost some aphids while moving them through the area<br><br>Objective: Find the lost aphids</div>
+<div class="filters"><button id="all">Show all</button><button id="none">Hide all</button></div><div id="cats"></div>
+<div class="note">The game has no minimap image for this level, so markers are shown on a grid (1 square ≈ 14 m). Background: terrain relief from the level heightmap (light = high, dark = low, ≈16 m range); toggle it top right.<br>Icons, screenshots and text from the game files.</div></div><div id="map"></div></div>
+<script>
+const DATA = {"bg": null, "terrain": "assets/terrain_H3M2E1_Exploration.png", "markers": [{"title": "Lost aphid", "cat": "collect", "icon": "assets/UI_Bestiary_Aphids.png", "img": "assets/UI_Screen_Aphid.jpg", "text": "Collect to add to your forces.", "details": [["World X / Y / Z", "-10391 / 1715 / 4750"]], "extra": "", "x": 946.7, "y": -497.1}, {"title": "Lost aphid", "cat": "collect", "icon": "assets/UI_Bestiary_Aphids.png", "img": "assets/UI_Screen_Aphid.jpg", "text": "Collect to add to your forces.", "details": [["World X / Y / Z", "-16027 / 3142 / 4260"]], "extra": "", "x": 694.4, "y": -560.9}, {"title": "Lost aphid", "cat": "collect", "icon": "assets/UI_Bestiary_Aphids.png", "img": "assets/UI_Screen_Aphid.jpg", "text": "Collect to add to your forces.", "details": [["World X / Y / Z", "-20560 / 4626 / 4582"]], "extra": "", "x": 491.6, "y": -627.3}, {"title": "Lost aphid", "cat": "collect", "icon": "assets/UI_Bestiary_Aphids.png", "img": "assets/UI_Screen_Aphid.jpg", "text": "Collect to add to your forces.", "details": [["World X / Y / Z", "-27499 / 3500 / 4774"]], "extra": "", "x": 181.0, "y": -576.9}, {"title": "Lost aphid", "cat": "collect", "icon": "assets/UI_Bestiary_Aphids.png", "img": "assets/UI_Screen_Aphid.jpg", "text": "Collect to add to your forces.", "details": [["World X / Y / Z", "-22383 / 7884 / 4710"]], "extra": "", "x": 410.0, "y": -773.2}, {"title": "Lost aphid", "cat": "collect", "icon": "assets/UI_Bestiary_Aphids.png", "img": "assets/UI_Screen_Aphid.jpg", "text": "Collect to add to your forces.", "details": [["World X / Y / Z", "-12295 / -499 / 4303"]], "extra": "", "x": 861.5, "y": -398.0}, {"title": "Lost aphid", "cat": "collect", "icon": "assets/UI_Bestiary_Aphids.png", "img": "assets/UI_Screen_Aphid.jpg", "text": "Collect to add to your forces.", "details": [["World X / Y / Z", "-23264 / -1493 / 5571"]], "extra": "", "x": 370.5, "y": -353.5}, {"title": "Lost aphid", "cat": "collect", "icon": "assets/UI_Bestiary_Aphids.png", "img": "assets/UI_Screen_Aphid.jpg", "text": "Collect to add to your forces.", "details": [["World X / Y / Z", "-17664 / -771 / 5207"]], "extra": "", "x": 621.2, "y": -385.8}, {"title": "Lost aphid", "cat": "collect", "icon": "assets/UI_Bestiary_Aphids.png", "img": "assets/UI_Screen_Aphid.jpg", "text": "Collect to add to your forces.", "details": [["World X / Y / Z", "-9703 / -5148 / 5612"]], "extra": "", "x": 977.5, "y": -189.9}, {"title": "Lost aphid", "cat": "collect", "icon": "assets/UI_Bestiary_Aphids.png", "img": "assets/UI_Screen_Aphid.jpg", "text": "Collect to add to your forces.", "details": [["World X / Y / Z", "-30503 / 2240 / 4105"]], "extra": "", "x": 46.5, "y": -520.6}, {"title": "Start position", "cat": "start", "icon": "assets/UI_minimap_Player.png", "img": null, "text": "", "details": [["World X / Y / Z", "-21010 / -2069 / 6884"]], "extra": "", "x": 471.4, "y": -327.7}, {"title": "Glow worm (spawner)", "cat": "wildlife", "icon": "assets/UI_Bestiary_Glowworms.png", "img": "assets/UI_Screen_GlowWorm.jpg", "text": "Lesser beetle.\nCapable of producing light to attract its mate.\nFemales glow and are bigger. Focus on them when hunting.", "details": [["Sublevel", "H3M2E1_BreathingWorld"], ["World X / Y / Z", "-10784 / 4862 / 6022"]], "extra": "", "x": 929.1, "y": -637.9}, {"title": "Glow worm (spawner)", "cat": "wildlife", "icon": "assets/UI_Bestiary_Glowworms.png", "img": "assets/UI_Screen_GlowWorm.jpg", "text": "Lesser beetle.\nCapable of producing light to attract its mate.\nFemales glow and are bigger. Focus on them when hunting.", "details": [["Sublevel", "H3M2E1_BreathingWorld"], ["World X / Y / Z", "-26587 / 7809 / 4697"]], "extra": "", "x": 221.8, "y": -769.8}, {"title": "Glow worm (spawner)", "cat": "wildlife", "icon": "assets/UI_Bestiary_Glowworms.png", "img": "assets/UI_Screen_GlowWorm.jpg", "text": "Lesser beetle.\nCapable of producing light to attract its mate.\nFemales glow and are bigger. Focus on them when hunting.", "details": [["Count", 1], ["Sublevel", "H3M2E1_BreathingWorld"], ["World X / Y / Z", "-18682 / 9886 / 4972"]], "extra": "", "x": 575.6, "y": -862.8}, {"title": "Glow worm (spawner)", "cat": "wildlife", "icon": "assets/UI_Bestiary_Glowworms.png", "img": "assets/UI_Screen_GlowWorm.jpg", "text": "Lesser beetle.\nCapable of producing light to attract its mate.\nFemales glow and are bigger. Focus on them when hunting.", "details": [["Count", 1], ["Sublevel", "H3M2E1_BreathingWorld"], ["World X / Y / Z", "-13600 / -6497 / 4592"]], "extra": "", "x": 803.1, "y": -129.5}, {"title": "Glow worm (spawner)", "cat": "wildlife", "icon": "assets/UI_Bestiary_Glowworms.png", "img": "assets/UI_Screen_GlowWorm.jpg", "text": "Lesser beetle.\nCapable of producing light to attract its mate.\nFemales glow and are bigger. Focus on them when hunting.", "details": [["Count", 1], ["Sublevel", "H3M2E1_BreathingWorld"], ["World X / Y / Z", "-22961 / 769 / 5132"]], "extra": "", "x": 384.1, "y": -454.7}, {"title": "Pillbug (swarm)", "cat": "wildlife", "icon": "assets/UI_Bestiary_Pillbug.png", "img": "assets/UI_Screen_Pillbug.jpg", "text": "Could be prey.\nCurls into a ball to avoid danger.\nNot worth the hassle to open up and eat.", "details": [["Sublevel", "H3M2E1_BreathingWorld"], ["World X / Y / Z", "-19805 / -2111 / 5276"]], "extra": "", "x": 525.3, "y": -325.8}, {"title": "Pillbug (swarm)", "cat": "wildlife", "icon": "assets/UI_Bestiary_Pillbug.png", "img": "assets/UI_Screen_Pillbug.jpg", "text": "Could be prey.\nCurls into a ball to avoid danger.\nNot worth the hassle to open up and eat.", "details": [["Sublevel", "H3M2E1_BreathingWorld"], ["World X / Y / Z", "-19136 / -2194 / 5203"]], "extra": "", "x": 555.3, "y": -322.1}, {"title": "Pillbug (swarm)", "cat": "wildlife", "icon": "assets/UI_Bestiary_Pillbug.png", "img": "assets/UI_Screen_Pillbug.jpg", "text": "Could be prey.\nCurls into a ball to avoid danger.\nNot worth the hassle to open up and eat.", "details": [["Sublevel", "H3M2E1_BreathingWorld"], ["World X / Y / Z", "-19956 / -2645 / 5438"]], "extra": "", "x": 518.6, "y": -301.9}, {"title": "Pillbug (swarm)", "cat": "wildlife", "icon": "assets/UI_Bestiary_Pillbug.png", "img": "assets/UI_Screen_Pillbug.jpg", "text": "Could be prey.\nCurls into a ball to avoid danger.\nNot worth the hassle to open up and eat.", "details": [["Sublevel", "H3M2E1_BreathingWorld"], ["World X / Y / Z", "-19006 / -1692 / 5203"]], "extra": "", "x": 561.1, "y": -344.6}, {"title": "Pillbug (swarm)", "cat": "wildlife", "icon": "assets/UI_Bestiary_Pillbug.png", "img": "assets/UI_Screen_Pillbug.jpg", "text": "Could be prey.\nCurls into a ball to avoid danger.\nNot worth the hassle to open up and eat.", "details": [["Sublevel", "H3M2E1_BreathingWorld"], ["World X / Y / Z", "-19780 / -1545 / 5203"]], "extra": "", "x": 526.4, "y": -351.2}, {"title": "Pillbug (swarm)", "cat": "wildlife", "icon": "assets/UI_Bestiary_Pillbug.png", "img": "assets/UI_Screen_Pillbug.jpg", "text": "Could be prey.\nCurls into a ball to avoid danger.\nNot worth the hassle to open up and eat.", "details": [["Sublevel", "H3M2E1_BreathingWorld"], ["World X / Y / Z", "-19824 / -924 / 5203"]], "extra": "", "x": 524.5, "y": -379.0}, {"title": "Pillbug (swarm)", "cat": "wildlife", "icon": "assets/UI_Bestiary_Pillbug.png", "img": "assets/UI_Screen_Pillbug.jpg", "text": "Could be prey.\nCurls into a ball to avoid danger.\nNot worth the hassle to open up and eat.", "details": [["Sublevel", "H3M2E1_BreathingWorld"], ["World X / Y / Z", "-18660 / -720 / 5203"]], "extra": "", "x": 576.6, "y": -388.1}, {"title": "Pillbug (swarm)", "cat": "wildlife", "icon": "assets/UI_Bestiary_Pillbug.png", "img": "assets/UI_Screen_Pillbug.jpg", "text": "Could be prey.\nCurls into a ball to avoid danger.\nNot worth the hassle to open up and eat.", "details": [["Sublevel", "H3M2E1_BreathingWorld"], ["World X / Y / Z", "-19348 / -632 / 5149"]], "extra": "", "x": 545.8, "y": -392.0}, {"title": "Metal Circle", "cat": "poi", "icon": "assets/UI_Scans_OldMetalWheel.png", "img": "assets/UI_Screen_Scan_MetalDisk.jpg", "text": "Large metal structure.\nRust in different stages of progression.\nThis object of unknown origin or purpose has been here for quite some time.", "details": [["Scan keywords", "Unknown origin, Metal, Useless"], ["Sublevel", "H3E1_Props"], ["World X / Y / Z", "-19105 / 10594 / 5019"]], "extra": "", "x": 556.7, "y": -894.5}]};
+const CATS = [{"id": "start", "label": "Start position", "color": "#4aa3ff"}, {"id": "checkpoint", "label": "Checkpoints", "color": "#7fd1ff"}, {"id": "quest", "label": "Quest givers", "color": "#2ecc71"}, {"id": "golden", "label": "Golden beetles", "color": "#ffd700"}, {"id": "butterfly", "label": "Collectible butterflies", "color": "#ff8fd1"}, {"id": "collect", "label": "Lost sisters / aphids", "color": "#ff6fb5"}, {"id": "poi", "label": "Points of interest (scans)", "color": "#b07cff"}, {"id": "nest", "label": "Nests", "color": "#9a9a9a"}, {"id": "forage", "label": "Foraging spots", "color": "#3aa655"}, {"id": "resource", "label": "Large resources", "color": "#f2c230"}, {"id": "predator", "label": "Predators & beasts", "color": "#e74c3c"}, {"id": "wildlife", "label": "Wildlife", "color": "#e67e22"}];
+const map = L.map('map', {crs: L.CRS.Simple, minZoom: -2, maxZoom: 4, zoomSnap: 0.25, attributionControl: false});
+const B = [[-1024, 0], [0, 1024]];
+if (DATA.bg) L.imageOverlay(DATA.bg, B).addTo(map);
+else {
+  const overlays = {};
+  if (DATA.terrain) overlays['Terrain relief'] = L.imageOverlay(DATA.terrain, B).addTo(map);
+  const g = overlays['Grid'] = L.layerGroup().addTo(map);
+  L.control.layers(null, overlays, {collapsed: false}).addTo(map);
+  for (let i = 0; i <= 1024; i += 64) {
+    L.polyline([[-i, 0], [-i, 1024]], {color: '#3a3226', weight: 1, interactive: false}).addTo(g);
+    L.polyline([[0, i], [-1024, i]], {color: '#3a3226', weight: 1, interactive: false}).addTo(g);
+  }
+}
+const layers = {};
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+for (const c of CATS) layers[c.id] = L.layerGroup().addTo(map);
+for (const m of DATA.markers) {
+  const c = CATS.find(x => x.id === m.cat);
+  const sz = m.cat === 'wildlife' ? 26 : 34;
+  const icon = L.divIcon({className: '', iconSize: [sz, sz], iconAnchor: [sz/2, sz/2], popupAnchor: [0, -sz/2],
+    html: `<div class="gi" style="--c:${m.ring || c.color};width:${sz-4}px;height:${sz-4}px;background-image:url('${m.icon || ''}')"></div>`});
+  const rows = m.details.map(([k, v]) => `<tr><td>${esc(k)}</td><td>${esc(v)}</td></tr>`).join('');
+  const html = `<div class="pp" style="--c:${c.color}"><div class="k">${esc(c.label)}</div>
+    <h3>${m.icon ? `<img src="${m.icon}">` : ''}${esc(m.title)}</h3>
+    ${m.img ? `<img class="shot" src="${m.img}">` : ''}${m.text ? `<div class="txt">${esc(m.text)}</div>` : ''}
+    ${m.extra ? `<div class="dlg">${m.extra}</div>` : ''}<table>${rows}</table></div>`;
+  L.marker([m.y, m.x], {icon, title: m.title, riseOnHover: true}).bindPopup(html, {maxWidth: 330}).bindTooltip(esc(m.title), {direction: 'top', offset: [0, -sz/2]}).addTo(layers[m.cat]);
+}
+const box = document.getElementById('cats');
+for (const c of CATS) {
+  const n = DATA.markers.filter(m => m.cat === c.id).length;
+  if (!n) continue;
+  const ic = (DATA.markers.find(m => m.cat === c.id && m.icon) || {}).icon || '';
+  const el = document.createElement('div');
+  el.className = 'cat'; el.style.setProperty('--c', c.color);
+  el.innerHTML = `<img src="${ic}"><span>${esc(c.label)}</span><span class="n">${n}</span>`;
+  el.onclick = () => { const on = map.hasLayer(layers[c.id]); on ? map.removeLayer(layers[c.id]) : map.addLayer(layers[c.id]); el.classList.toggle('off', on); };
+  box.appendChild(el);
+}
+document.getElementById('all').onclick = () => { for (const c of CATS) map.addLayer(layers[c.id]); document.querySelectorAll('.cat').forEach(e => e.classList.remove('off')); };
+document.getElementById('none').onclick = () => { for (const c of CATS) map.removeLayer(layers[c.id]); document.querySelectorAll('.cat').forEach(e => e.classList.add('off')); };
+const pts = DATA.markers.map(m => [m.y, m.x]);
+map.fitBounds(DATA.bg ? B : L.latLngBounds(pts).pad(0.08));
+</script></body></html>

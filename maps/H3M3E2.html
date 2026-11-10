@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Steadfast – Empire of the Ants map</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<style>
+ html,body{margin:0;height:100%;background:#15130f;color:#e8e2d6;font-family:Arial,Helvetica,sans-serif}
+ #wrap{display:flex;height:100%}
+ #side{width:290px;overflow-y:auto;background:#1f1b15;border-right:1px solid #3a3226;padding:14px;box-sizing:border-box}
+ #side h1{font-size:19px;margin:6px 0 2px} .back{color:#7fd1ff;font-size:12px;text-decoration:none} #side .sub{color:#b9ad97;font-size:12px;margin-bottom:10px}
+ #side .desc{font-size:12px;color:#cfc6b4;line-height:1.4;margin:8px 0 12px}
+ .filters{display:flex;gap:6px;margin-bottom:8px} .filters button{flex:1;background:#2c261d;color:#e8e2d6;border:1px solid #4a4030;border-radius:4px;padding:4px;cursor:pointer;font-size:12px}
+ .cat{display:flex;align-items:center;gap:8px;padding:5px 6px;border-radius:6px;cursor:pointer;user-select:none;font-size:13px}
+ .cat:hover{background:#2c261d} .cat.off{opacity:.35}
+ .cat img{width:26px;height:26px;border-radius:50%;background:#000;border:2px solid var(--c);object-fit:cover}
+ .cat .n{margin-left:auto;color:#9d927c;font-size:12px}
+ #map{flex:1;background:#2a241b}
+ .gi{border-radius:50%;border:2px solid var(--c);background:#111 center/cover no-repeat;box-shadow:0 1px 4px rgba(0,0,0,.7)}
+ .leaflet-popup-content-wrapper{background:#1f1b15;color:#e8e2d6;border-radius:8px} .leaflet-popup-tip{background:#1f1b15}
+ .leaflet-popup-content{margin:12px 14px;width:300px!important;font-size:13px;line-height:1.4}
+ .pp h3{margin:0 0 2px;font-size:16px;display:flex;align-items:center;gap:8px} .pp h3 img{width:32px;height:32px;border-radius:50%;border:2px solid var(--c);background:#000}
+ .pp .k{color:#9d927c;font-size:11px;text-transform:uppercase;letter-spacing:.05em}
+ .pp .shot{width:100%;border-radius:6px;margin:8px 0}
+ .pp .txt{white-space:pre-line;font-style:italic;color:#d8cfbd}
+ .pp table{width:100%;border-collapse:collapse;margin-top:8px;font-size:12px} .pp td{padding:2px 0;vertical-align:top} .pp td:first-child{color:#9d927c;width:42%}
+ .pp .dlg{max-height:170px;overflow-y:auto;margin-top:8px;border-top:1px solid #3a3226;padding-top:6px}
+ .pp .dlg p{margin:3px 0} .pp .npc{color:#e8e2d6} .pp .ans{padding-left:10px;color:#cfc6b4} .pp .you{color:#7fd1ff}
+ .leaflet-container a.leaflet-popup-close-button{color:#b9ad97}
+ .note{font-size:11px;color:#7d735f;margin-top:14px;line-height:1.4}
+</style></head><body><div id="wrap">
+<div id="side"><a class="back" href="../index.html">&larr; All maps</a><h1>Steadfast</h1><div class="sub">Chapter 3 · Niziu-ni-kan · Tactic · H3M3E2</div><div class="desc"><b>Northern Niziu-ni-kan</b><br>Keeping this area away from Black Ants is a priority<br><br>Objective: Protect your nests and do not lose more than 3</div>
+<div class="filters"><button id="all">Show all</button><button id="none">Hide all</button></div><div id="cats"></div>
+<div class="note">Background: in-game minimap. Alignment: camera (100%).<br>Icons, screenshots and text from the game files.</div></div><div id="map"></div></div>
+<script>
+const DATA = {"bg": "assets/minimap_H3M3E2.png", "terrain": null, "markers": [{"title": "Start position", "cat": "start", "icon": "assets/UI_minimap_Player.png", "img": null, "text": "", "details": [["World X / Y / Z", "5980 / 9413 / 8454"]], "extra": "", "x": 621.5, "y": -738.6}, {"title": "Rock bridge nest", "cat": "nest", "icon": "assets/UI_minimap_FactionAlpha.png", "img": null, "text": "", "details": [["Owner clan", "Alpha"], ["Upgrade slots", 7], ["World X / Y / Z", "11823 / 14364 / 8587"]], "extra": "", "ring": "#2f7de1", "x": 771.3, "y": -865.6}, {"title": "Between the rocks nest", "cat": "nest", "icon": "assets/UI_minimap_FactionAlpha.png", "img": null, "text": "", "details": [["Owner clan", "Alpha"], ["Upgrade slots", 5], ["World X / Y / Z", "3835 / -758 / 7811"]], "extra": "", "ring": "#2f7de1", "x": 566.5, "y": -477.8}, {"title": "Dead tree nest", "cat": "nest", "icon": "assets/UI_minimap_FactionAlpha.png", "img": null, "text": "", "details": [["Owner clan", "Alpha"], ["Upgrade slots", 5], ["World X / Y / Z", "6481 / -3213 / 7732"]], "extra": "", "ring": "#2f7de1", "x": 634.3, "y": -414.8}, {"title": "Rock bridge nest", "cat": "nest", "icon": "assets/UI_minimap_FactionAlpha.png", "img": null, "text": "", "details": [["Owner clan", "Alpha"], ["Upgrade slots", 7], ["World X / Y / Z", "-1855 / 11992 / 8148"]], "extra": "", "ring": "#2f7de1", "x": 420.6, "y": -804.7}, {"title": "Link nest", "cat": "nest", "icon": "assets/UI_minimap_FactionAlpha.png", "img": null, "text": "", "details": [["Owner clan", "Alpha"], ["Upgrade slots", 5], ["World X / Y / Z", "2039 / -4081 / 7816"]], "extra": "", "ring": "#2f7de1", "x": 520.4, "y": -392.6}, {"title": "Shaded nest", "cat": "nest", "icon": "assets/UI_minimap_FactionAlpha.png", "img": null, "text": "", "details": [["Owner clan", "Alpha"], ["Upgrade slots", 7], ["World X / Y / Z", "2896 / 3194 / 7806"]], "extra": "", "ring": "#2f7de1", "x": 542.4, "y": -579.1}, {"title": "Lake nest", "cat": "nest", "icon": "assets/UI_minimap_FactionAlpha.png", "img": null, "text": "", "details": [["Owner clan", "Alpha"], ["Upgrade slots", 7], ["World X / Y / Z", "-1234 / -6714 / 7796"]], "extra": "", "ring": "#2f7de1", "x": 436.5, "y": -325.0}, {"title": "Last frontier nest", "cat": "nest", "icon": "assets/UI_minimap_FactionAlpha.png", "img": null, "text": "", "details": [["Owner clan", "Alpha"], ["Upgrade slots", 7], ["World X / Y / Z", "8258 / 11548 / 7942"]], "extra": "", "ring": "#2f7de1", "x": 679.9, "y": -793.4}, {"title": "Bel-o-kan's headquarters", "cat": "nest", "icon": "assets/UI_minimap_FactionAlpha.png", "img": null, "text": "", "details": [["Owner clan", "Alpha"], ["Upgrade slots", 9], ["World X / Y / Z", "4790 / 7565 / 7735"]], "extra": "", "ring": "#2f7de1", "x": 591.0, "y": -691.2}, {"title": "Middle nest", "cat": "nest", "icon": "assets/UI_minimap_FactionAlpha.png", "img": null, "text": "", "details": [["Owner clan", "Alpha"], ["Upgrade slots", 7], ["World X / Y / Z", "1974 / 11002 / 7762"]], "extra": "", "ring": "#2f7de1", "x": 518.8, "y": -779.3}, {"title": "Butterfly", "cat": "wildlife", "icon": "assets/icon_Butterfly.png", "img": "assets/UI_Screen_Butterfly.jpg", "text": "Lesser flying creature.\nIts wide and colorful wings are a delicacy.\nPerhaps because some of them feed on carrion?", "details": [["Sublevel", "H3E2_BeathingWorld"], ["World X / Y / Z", "159 / -8969 / 9541"]], "extra": "", "x": 472.2, "y": -267.2}, {"title": "Dragonfly", "cat": "wildlife", "icon": "assets/UI_Bestiary_Dragonfly.png", "img": "assets/UI_Screen_Dragonfly.jpg", "text": "Silent predator.\nHunts small creatures, faster than any other predator around.\nSeems uninterested by our kind.", "details": [["Sublevel", "H3E2_BeathingWorld"], ["World X / Y / Z", "15663 / -1186 / 9033"]], "extra": "", "x": 869.8, "y": -466.8}, {"title": "Wasp (flight lane)", "cat": "wildlife", "icon": "assets/UI_Bestiary_Wasp.png", "img": "assets/UI_Screen_Wasp.jpg", "text": "Flying predator.\nA powerful and aggressive creature. Always very busy.\nSocial creature that shares many physical traits with ants.", "details": [["Sublevel", "H3E2_BeathingWorld"], ["World X / Y / Z", "6733 / 7000 / 20064"]], "extra": "", "x": 640.8, "y": -676.7}]};
+const CATS = [{"id": "start", "label": "Start position", "color": "#4aa3ff"}, {"id": "checkpoint", "label": "Checkpoints", "color": "#7fd1ff"}, {"id": "quest", "label": "Quest givers", "color": "#2ecc71"}, {"id": "golden", "label": "Golden beetles", "color": "#ffd700"}, {"id": "butterfly", "label": "Collectible butterflies", "color": "#ff8fd1"}, {"id": "collect", "label": "Lost sisters / aphids", "color": "#ff6fb5"}, {"id": "poi", "label": "Points of interest (scans)", "color": "#b07cff"}, {"id": "nest", "label": "Nests", "color": "#9a9a9a"}, {"id": "forage", "label": "Foraging spots", "color": "#3aa655"}, {"id": "resource", "label": "Large resources", "color": "#f2c230"}, {"id": "predator", "label": "Predators & beasts", "color": "#e74c3c"}, {"id": "wildlife", "label": "Wildlife", "color": "#e67e22"}];
+const map = L.map('map', {crs: L.CRS.Simple, minZoom: -2, maxZoom: 4, zoomSnap: 0.25, attributionControl: false});
+const B = [[-1024, 0], [0, 1024]];
+if (DATA.bg) L.imageOverlay(DATA.bg, B).addTo(map);
+else {
+  const overlays = {};
+  if (DATA.terrain) overlays['Terrain relief'] = L.imageOverlay(DATA.terrain, B).addTo(map);
+  const g = overlays['Grid'] = L.layerGroup().addTo(map);
+  L.control.layers(null, overlays, {collapsed: false}).addTo(map);
+  for (let i = 0; i <= 1024; i += 64) {
+    L.polyline([[-i, 0], [-i, 1024]], {color: '#3a3226', weight: 1, interactive: false}).addTo(g);
+    L.polyline([[0, i], [-1024, i]], {color: '#3a3226', weight: 1, interactive: false}).addTo(g);
+  }
+}
+const layers = {};
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+for (const c of CATS) layers[c.id] = L.layerGroup().addTo(map);
+for (const m of DATA.markers) {
+  const c = CATS.find(x => x.id === m.cat);
+  const sz = m.cat === 'wildlife' ? 26 : 34;
+  const icon = L.divIcon({className: '', iconSize: [sz, sz], iconAnchor: [sz/2, sz/2], popupAnchor: [0, -sz/2],
+    html: `<div class="gi" style="--c:${m.ring || c.color};width:${sz-4}px;height:${sz-4}px;background-image:url('${m.icon || ''}')"></div>`});
+  const rows = m.details.map(([k, v]) => `<tr><td>${esc(k)}</td><td>${esc(v)}</td></tr>`).join('');
+  const html = `<div class="pp" style="--c:${c.color}"><div class="k">${esc(c.label)}</div>
+    <h3>${m.icon ? `<img src="${m.icon}">` : ''}${esc(m.title)}</h3>
+    ${m.img ? `<img class="shot" src="${m.img}">` : ''}${m.text ? `<div class="txt">${esc(m.text)}</div>` : ''}
+    ${m.extra ? `<div class="dlg">${m.extra}</div>` : ''}<table>${rows}</table></div>`;
+  L.marker([m.y, m.x], {icon, title: m.title, riseOnHover: true}).bindPopup(html, {maxWidth: 330}).bindTooltip(esc(m.title), {direction: 'top', offset: [0, -sz/2]}).addTo(layers[m.cat]);
+}
+const box = document.getElementById('cats');
+for (const c of CATS) {
+  const n = DATA.markers.filter(m => m.cat === c.id).length;
+  if (!n) continue;
+  const ic = (DATA.markers.find(m => m.cat === c.id && m.icon) || {}).icon || '';
+  const el = document.createElement('div');
+  el.className = 'cat'; el.style.setProperty('--c', c.color);
+  el.innerHTML = `<img src="${ic}"><span>${esc(c.label)}</span><span class="n">${n}</span>`;
+  el.onclick = () => { const on = map.hasLayer(layers[c.id]); on ? map.removeLayer(layers[c.id]) : map.addLayer(layers[c.id]); el.classList.toggle('off', on); };
+  box.appendChild(el);
+}
+document.getElementById('all').onclick = () => { for (const c of CATS) map.addLayer(layers[c.id]); document.querySelectorAll('.cat').forEach(e => e.classList.remove('off')); };
+document.getElementById('none').onclick = () => { for (const c of CATS) map.removeLayer(layers[c.id]); document.querySelectorAll('.cat').forEach(e => e.classList.add('off')); };
+const pts = DATA.markers.map(m => [m.y, m.x]);
+map.fitBounds(DATA.bg ? B : L.latLngBounds(pts).pad(0.08));
+</script></body></html>
