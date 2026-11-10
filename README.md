@@ -14,9 +14,6 @@ from the game files. Open **`index.html`**, pick a map, and click a marker for i
 |---|---|
 | `index.html`, `maps/<level>.html` | Map index and one Leaflet map per level (60) |
 | `maps/assets/` | Icons, screenshots, minimap and terrain backgrounds |
-| `data/markers.csv` | Every marker: level, category, title, world x/y/z (cm), map x/y, details, description |
-| `data/levels.csv` | Per level: name, group, background type, alignment note, marker counts |
-| `data/EotA_Missions.xlsx`, `data/EotA_Creatures.xlsx` | Missions (objectives, clans, setup) and the 46 creatures (stats, powers, levels) |
 | `steam-guide/` | Steam guide text, images and `make_images.py` |
 
 ## Backgrounds
