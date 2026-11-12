@@ -1,7 +1,7 @@
 # Empire of the Ants – interactive maps
 
 Interactive maps for every level of *Empire of the Ants* (Microids / Tower Five, 2024): nests, foraging spots,
-resources, creatures, golden beetles, butterflies, lost sisters, quest givers, checkpoints and scans, all extracted
+resources, creatures, golden beetles, butterflies, lost sisters, quest givers, NPCs, loadout points, checkpoints and scans, all extracted
 from the game files. Open **`index.html`**, pick a map, and click a marker for its icon, screenshot, text and details.
 
 **Live:** https://lindblum.github.io/empire-of-the-ants-maps/
